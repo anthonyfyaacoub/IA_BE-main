@@ -3,6 +3,16 @@ from api import db, app
 from api.models import Recipe
 
 
+@app.route('/')
+def hello_world():
+    return 'Hello, World!'
+
+
+@app.route('/skull', methods=['GET'])
+def skull():
+    return 'Hi! This is the BACKEND SKULL! 💀'
+
+
 @app.route('/', methods=['POST'])
 def create_recipe():
     name = request.json['name']
