@@ -3,15 +3,6 @@ from api import db, app
 from api.models import Recipe
 
 
-@app.route('/')
-def hello_world():
-    return 'Hello, World!'
-
-@app.route('/skull', methods=['GET'])
-def skull():
-    return 'Hi! This is the BACKEND SKULL! 💀'
-
-
 @app.route('/', methods=['POST'])
 def create_recipe():
     name = request.json['name']
@@ -24,15 +15,18 @@ def create_recipe():
     db.session.commit()
     return format_recipe(recipe)
 
+
 @app.route('/', methods=['GET'])
 def get_recipes():
     recipes = Recipe.query.all()
     return {'recipes': [format_recipe(recipe) for recipe in recipes]}
 
+
 @app.route('/<int:id>', methods=['GET'])
 def get_recipe(id):
     recipe = Recipe.query.get(id)
     return format_recipe(recipe)
+
 
 @app.route('/<int:id>', methods=['PUT'])
 def update_recipe(id):
@@ -45,12 +39,14 @@ def update_recipe(id):
     db.session.commit()
     return format_recipe(recipe)
 
+
 @app.route('/<int:id>', methods=['DELETE'])
 def delete_recipe(id):
     recipe = Recipe.query.get(id)
     db.session.delete(recipe)
     db.session.commit()
     return format_recipe(recipe)
+
 
 def format_recipe(recipe):
     return {

@@ -1,3 +1,5 @@
+from api import routes
+from api.models import Recipe
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
@@ -8,7 +10,7 @@ app = Flask(__name__)
 
 load_dotenv()
 
-# Select environment based on the ENV environment variable.
+# Select environment based on the ENV environment variable
 if os.getenv('ENV') == 'dev':
     print("Running in development mode")
     app.config.from_object('config.DevelopmentConfig')
@@ -22,8 +24,5 @@ else:
 
 db = SQLAlchemy(app)
 
-from api.models import Recipe
 db.create_all()
 CORS(app)
-
-from api import routes
