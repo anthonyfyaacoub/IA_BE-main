@@ -3,7 +3,11 @@ import pytest
 
 
 def test_create_recipe():
-
+    """
+    GIVEN a Recipe model
+    WHEN a new Recipe is created
+    THEN check the name, ingredients, steps, rating and favorite fields are defined correctly
+    """
     recipe = Recipe('Spaghetti Bolognese', 'Spaghetti, Tomato Sauce, Meat, Salt, Spices',
                     'Boil spaghetti, Mix Sauce with meat, Add salt and spices, Serve', 5, True)
     assert recipe.name == 'Spaghetti Bolognese'
